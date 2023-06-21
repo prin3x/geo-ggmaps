@@ -12,7 +12,17 @@ function App() {
 
   const requestGeolocation = () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+      setCurrentPosition(() => {
+        const lat = localStorage.getItem("latitude");
+        const lng = localStorage.getItem("longitude");
+        if (!lat || !lng) return null;
+
+        return {
+          lat: parseFloat(lat) + Math.random() / 10000000000,
+          lng: parseFloat(lng) + Math.random() / 10000000000,
+        };
+      });
+
     } else {
       console.error(`Error: Geolocation is not supported by this browser.`);
     }
@@ -20,11 +30,11 @@ function App() {
 
   const successCallback = (position: any) => {
     const { latitude, longitude } = position.coords;
-    setLocalStorage(latitude, longitude)
+    setLocalStorage(latitude, longitude);
 
     setCurrentPosition({
-      lat: latitude,
-      lng: longitude,
+      lat: latitude + Math.random() / 1000,
+      lng: longitude + Math.random() / 1000,
     });
   };
 
@@ -63,7 +73,12 @@ function App() {
   return (
     <div className="App">
       {currentPosition ? (
-        <GeoMaps lat={currentPosition.lat} lng={currentPosition.lng} requestGeolocation={requestGeolocation} data-testid="geo-maps" />
+        <GeoMaps
+          lat={currentPosition.lat}
+          lng={currentPosition.lng}
+          requestGeolocation={requestGeolocation}
+          data-testid="geo-maps"
+        />
       ) : (
         <LoadingComp data-testid="loading-comp" />
       )}
