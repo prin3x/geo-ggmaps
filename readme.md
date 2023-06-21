@@ -1,6 +1,8 @@
-# Project Name
+# Location Tracker App
 
-Short description or tagline for the project.
+## Description
+
+This awesome application allows you to effortlessly track your current device location and stay updated with its real-time movements. Stay connected and never lose sight of where you or your device are at any given moment!
 
 ## Table of Contents
 
