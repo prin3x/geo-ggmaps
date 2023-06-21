@@ -60,6 +60,6 @@
     "@types/google-map-react": "^2.1.7"
   },
   "engines": {
-    "node": "16.x"
+    "node": "20.x"
   }
 }
