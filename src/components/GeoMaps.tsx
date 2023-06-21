@@ -13,6 +13,7 @@ interface IMapProps {
 }
 
 export default function GeoMaps(props: IMapProps) {
+    console.log(props)
   return (
     <div style={{ height: "100vh", width: "100%" }} className="map-container">
       <div

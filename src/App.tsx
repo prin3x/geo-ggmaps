@@ -17,6 +17,7 @@ function App() {
         const lng = localStorage.getItem("longitude");
         if (!lat || !lng) return null;
 
+
         return {
           lat: parseFloat(lat) + Math.random() / 10000000000,
           lng: parseFloat(lng) + Math.random() / 10000000000,
@@ -31,7 +32,6 @@ function App() {
   const successCallback = (position: any) => {
     const { latitude, longitude } = position.coords;
     setLocalStorage(latitude, longitude);
-    console.log(`Latitude: ${latitude} °, Longitude: ${longitude} °`)
 
     setCurrentPosition({
       lat: latitude,
