@@ -10,7 +10,6 @@ interface IMapProps {
 
 export default function GeoMaps(props: IMapProps) {
   return (
-    // Important! Always set the container height explicitly
     <div style={{ height: "100vh", width: "100%" }}>
       <GoogleMapReact
         yesIWantToUseGoogleMapApiInternals
