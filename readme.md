@@ -1,9 +1,5 @@
 # Location Tracker App
 
-## Description
-
-This awesome application allows you to effortlessly track your current device location and stay updated with its real-time movements. Stay connected and never lose sight of where you or your device are at any given moment!
-
 ## Table of Contents
 
 - [Description](#description)
@@ -14,7 +10,7 @@ This awesome application allows you to effortlessly track your current device lo
 
 ## Description
 
-Provide a brief overview of the project, its purpose, and key features. Include any relevant background information or context.
+This awesome application allows you to effortlessly track your current device location and stay updated with its real-time movements. Stay connected and never lose sight of where you or your device are at any given moment!
 
 ## Installation
 
