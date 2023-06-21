@@ -62,3 +62,34 @@
     transform: rotate(360deg);
   }
 }
+
+
+.map-container {
+  height: 100vh;
+  width: 100%;
+}
+
+.current-location-button {
+  position: absolute;
+  bottom: 20%;
+  right: 10px;
+  z-index: 9999;
+  background-color: white;
+  border-radius: 99px;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.current-location-button:hover {
+  background-color: #f1f1f1;
+}
+
+.current-location-button:active {
+  background-color: #ffffff;
+}

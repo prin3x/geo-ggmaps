@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./styles/App.css";
+import "./styles/style.css";
 import GeoMaps from "./components/GeoMaps";
 import LoadingComp from "./components/LoadingComp";
 import { setLocalStorage } from "./functions/localstorage.functions";
@@ -9,6 +9,14 @@ function App() {
     lat: number;
     lng: number;
   }>(null);
+
+  const requestGeolocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+    } else {
+      console.error(`Error: Geolocation is not supported by this browser.`);
+    }
+  };
 
   const successCallback = (position: any) => {
     const { latitude, longitude } = position.coords;
@@ -21,7 +29,7 @@ function App() {
   };
 
   const errorCallback = (error: any) => {
-    console.error("Location error:", error);
+    console.error(`Error: ${error.code} ${error.message}`);
   };
 
   useEffect(() => {
@@ -55,9 +63,9 @@ function App() {
   return (
     <div className="App">
       {currentPosition ? (
-        <GeoMaps lat={currentPosition.lat} lng={currentPosition.lng} />
+        <GeoMaps lat={currentPosition.lat} lng={currentPosition.lng} requestGeolocation={requestGeolocation} data-testid="geo-maps" />
       ) : (
-        <LoadingComp />
+        <LoadingComp data-testid="loading-comp" />
       )}
     </div>
   );
