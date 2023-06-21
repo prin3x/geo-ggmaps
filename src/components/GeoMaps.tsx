@@ -8,28 +8,7 @@ interface IMapProps {
   lng: number;
 }
 
-export default function SimpleMap(props: IMapProps) {
-  const [currentPosition, setCurrentPosition] = useState({
-    lat: props.lat,
-    lng: props.lng,
-  });
-
-  useEffect(() => {
-    updateCurrentPosition();
-  }, []);
-
-  const updateCurrentPosition = () => {
-    const lat = props.lat;
-    const lng = props.lng;
-
-    if (lat && lng) {
-      setCurrentPosition({
-        lat,
-        lng
-      });
-    }
-  };
-
+export default function GeoMaps(props: IMapProps) {
   return (
     // Important! Always set the container height explicitly
     <div style={{ height: "100vh", width: "100%" }}>

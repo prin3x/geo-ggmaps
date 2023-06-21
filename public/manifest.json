@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "host": "geo-ggmaps.vercel.app",
+  "short_name": "LT",
+  "name": "LocationTracker",
   "icons": [
     {
       "src": "favicon.ico",

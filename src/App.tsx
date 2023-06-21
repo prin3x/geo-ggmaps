@@ -1,10 +1,13 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { useEffect } from "react";
 import "./App.css";
-import SimpleMap from "./GoogleMap";
+import GeoMaps from "./components/GeoMaps";
+import LoadingComp from "./components/LoadingComp";
 
 function App() {
-  const [currentPosition, setCurrentPosition] = React.useState<null | {lat: number; lng:number}>(null);
+  const [currentPosition, setCurrentPosition] = React.useState<null | {
+    lat: number;
+    lng: number;
+  }>(null);
 
   const handleSuccess = (position: any) => {
     const latitude = position.coords.latitude;
@@ -34,12 +37,70 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    let watchId: any;
+
+    const successCallback = (position: any) => {
+      const { latitude, longitude } = position.coords;
+      setCurrentPosition({
+        lat: latitude,
+        lng: longitude,
+      });
+    };
+
+    const errorCallback = (error: any) => {
+      console.error("Location error:", error);
+    };
+
+    // Start watching for location updates
+    if (navigator.geolocation) {
+      watchId = navigator.geolocation.watchPosition(
+        successCallback,
+        errorCallback,
+        {
+          enableHighAccuracy: true,
+        }
+      );
+    }
+
+    return () => {
+      // Stop watching for location updates when component is unmounted
+      if (navigator.geolocation) {
+        navigator.geolocation.clearWatch(watchId);
+      }
+    };
+  }, []);
+
+  window.addEventListener('beforeinstallprompt', (event) => {
+    // Prevent the default browser prompt
+    event.preventDefault();
+    // Show your custom "Add to Home Screen" prompt
+    // e.g., display a button or a custom UI element
+    // and handle the user interaction to call the `prompt()` method
+    showAddToHomeScreenPrompt(event);
+  });
+  
+  function showAddToHomeScreenPrompt(event: any) {
+    // Show your custom prompt UI and handle the user interaction
+    // For example, display a button and call the prompt() method on click
+    const addToHomeScreenButton = document.getElementById('add-to-home-screen-button');
+    if (!addToHomeScreenButton) return;
+    addToHomeScreenButton.addEventListener('click', () => {
+      // Call the prompt() method to show the native "Add to Home Screen" prompt
+      event.prompt();
+      // Optionally, handle the user's choice and log the result
+      event.userChoice.then((choiceResult: any) => {
+        console.log('User choice:', choiceResult.outcome);
+      });
+    });
+  }
+
   return (
     <div className="App">
-      <h2>Geolocation Component</h2>
-      <button onClick={requestGeolocation}>Get Location</button>
-      {currentPosition && (
-        <SimpleMap lat={currentPosition.lat} lng={currentPosition.lng} />
+      {currentPosition ? (
+        <GeoMaps lat={currentPosition.lat} lng={currentPosition.lng} />
+      ) : (
+        <LoadingComp />
       )}
     </div>
   );
