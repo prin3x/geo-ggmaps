@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import GoogleMapReact from "google-map-react";
+import GoogleMapReact, { ChangeEventValue } from "google-map-react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 
@@ -14,8 +14,6 @@ export default function SimpleMap(props: IMapProps) {
     lat: props.lat,
     lng: props.lng,
   });
-
-  console.log(currentPosition,'currentPosition')
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -39,6 +37,8 @@ export default function SimpleMap(props: IMapProps) {
     zoom: 11,
   };
 
+  console.log(currentPosition)
+
   return (
     // Important! Always set the container height explicitly
     <div style={{ height: "100vh", width: "100%" }}>
@@ -47,6 +47,8 @@ export default function SimpleMap(props: IMapProps) {
         bootstrapURLKeys={{ key: "" }}
         defaultCenter={defaultProps.center}
         defaultZoom={16}
+        center={currentPosition}
+        onChange={(e: ChangeEventValue) => setCurrentPosition(e.center)}
       >
           <Marker lat={currentPosition.lat} lng={currentPosition.lng} />
       </GoogleMapReact>
