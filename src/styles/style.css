@@ -93,3 +93,22 @@
 .current-location-button:active {
   background-color: #ffffff;
 }
+
+.error-container {
+  text-align: center;
+  height: 100vh;
+  padding: 20px;
+  margin-top: 7.5rem;
+}
+
+.error-text{
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+}
+
+.lottie{
+  width: 160px;
+  height: 160px;
+  margin: 0 auto;
+}

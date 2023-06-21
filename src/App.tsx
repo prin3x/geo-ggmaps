@@ -3,37 +3,43 @@ import "./styles/style.css";
 import GeoMaps from "./components/GeoMaps";
 import LoadingComp from "./components/LoadingComp";
 import { setLocalStorage } from "./functions/localstorage.functions";
+import ErrorLocation from "./components/ErrorLocation";
 
 function App() {
   const [currentPosition, setCurrentPosition] = React.useState<null | {
     lat: number;
     lng: number;
   }>(null);
+  const [error, setError] = React.useState<null | string>(null);
+  const [loading, setLoading] = React.useState<boolean>(true);
 
   const successCallback = (position: any) => {
     const { latitude, longitude } = position.coords;
     setLocalStorage(latitude, longitude);
 
-    setCurrentPosition({
-      lat: latitude,
-      lng: longitude,
-    });
+    changeCurrentPosition(latitude, longitude);
+    setLoading(false);
   };
 
+  const changeCurrentPosition = (lat: number, lng: number) =>
+    setCurrentPosition({
+      lat,
+      lng,
+    });
+
   const errorCallback = (error: any) => {
-    console.error(`Error Geolocation WatchPosition - ${error.code} ${error.message}`);
+    console.error(
+      `Error Geolocation WatchPosition - ${error.code} ${error.message}`
+    );
+    setError(error);
+    setLoading(false);
   };
 
   useEffect(() => {
     const lat = localStorage.getItem("latitude");
     const lng = localStorage.getItem("longitude");
 
-    if (lat && lng) {
-      setCurrentPosition({
-        lat: parseFloat(lat),
-        lng: parseFloat(lng),
-      });
-    }
+    if (lat && lng) changeCurrentPosition(parseFloat(lat), parseFloat(lng));
 
     let watchId: any;
 
@@ -53,14 +59,13 @@ function App() {
 
   return (
     <div className="App" data-testid="app">
-      {currentPosition ? (
-        <GeoMaps
-          lat={currentPosition.lat}
-          lng={currentPosition.lng}
-        />
-      ) : (
+      {loading && !error ? (
         <LoadingComp />
-      )}
+      ) : !loading && currentPosition ? (
+        <GeoMaps lat={currentPosition.lat} lng={currentPosition.lng} />
+      ) : !loading && error ? (
+        <ErrorLocation />
+      ) : null}
     </div>
   );
 }
