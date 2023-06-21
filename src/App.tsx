@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./styles/App.css";
 import GeoMaps from "./components/GeoMaps";
 import LoadingComp from "./components/LoadingComp";
+import { setLocalStorage } from "./functions/localstorage.functions";
 
 function App() {
   const [currentPosition, setCurrentPosition] = React.useState<null | {
@@ -9,37 +10,10 @@ function App() {
     lng: number;
   }>(null);
 
-  const handleSuccess = (position: any) => {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-
-    localStorage.setItem("latitude", latitude);
-    localStorage.setItem("longitude", longitude);
-
-    setCurrentPosition({
-      lat: latitude,
-      lng: longitude,
-    });
-
-  };
-
-  const handleError = (error: any) => {
-    console.error(error);
-  };
-
-  const requestGeolocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
-    } else {
-      console.error(`Error`);
-    }
-  };
-
   const successCallback = (position: any) => {
     const { latitude, longitude } = position.coords;
-    localStorage.setItem("latitude", latitude);
-    localStorage.setItem("longitude", longitude);
-    
+    setLocalStorage(latitude, longitude)
+
     setCurrentPosition({
       lat: latitude,
       lng: longitude,
@@ -66,10 +40,7 @@ function App() {
     if (navigator.geolocation) {
       watchId = navigator.geolocation.watchPosition(
         successCallback,
-        errorCallback,
-        {
-          enableHighAccuracy: true,
-        }
+        errorCallback
       );
     }
 

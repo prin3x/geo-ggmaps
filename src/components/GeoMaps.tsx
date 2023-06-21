@@ -14,7 +14,7 @@ export default function GeoMaps(props: IMapProps) {
       <GoogleMapReact
         yesIWantToUseGoogleMapApiInternals
         bootstrapURLKeys={{ key: "" }}
-        defaultZoom={16}
+        defaultZoom={19}
         center={{ lat: props.lat, lng: props.lng }}
       >
         <Marker lat={props.lat} lng={props.lng} />
