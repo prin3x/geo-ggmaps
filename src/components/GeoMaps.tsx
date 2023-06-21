@@ -1,27 +1,16 @@
-import React, { useEffect, useState } from "react";
-import GoogleMapReact, { ChangeEventValue } from "google-map-react";
+import React from "react";
+import GoogleMapReact from "google-map-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faLocationDot,
-  faLocationArrow,
-} from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 interface IMapProps {
   lat: number;
   lng: number;
-  requestGeolocation: () => void;
 }
 
 export default function GeoMaps(props: IMapProps) {
-    console.log(props)
   return (
-    <div style={{ height: "100vh", width: "100%" }} className="map-container">
-      <div
-        className="current-location-button"
-        onClick={props.requestGeolocation}
-      >
-        <FontAwesomeIcon icon={faLocationArrow} />
-      </div>
+    <div style={{ height: "100vh", width: "100%" }} className="map-container" data-testid="geo-maps">
       <GoogleMapReact
         yesIWantToUseGoogleMapApiInternals
         bootstrapURLKeys={{ key: "" }}
@@ -35,7 +24,7 @@ export default function GeoMaps(props: IMapProps) {
 }
 
 const Marker = (props: any) => (
-  <div className="marker">
+  <div className="marker" data-testid="marker">
     <FontAwesomeIcon
       icon={faLocationDot}
       style={{ color: "#58b3f9" }}
