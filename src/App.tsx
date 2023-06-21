@@ -57,15 +57,21 @@ function App() {
     };
   }, []);
 
+  const RenderContent = () => {
+    if (loading && !error) {
+      return <LoadingComp />;
+    } else if (!loading && currentPosition) {
+      return <GeoMaps lat={currentPosition.lat} lng={currentPosition.lng} />;
+    } else if (!loading && error) {
+      return <ErrorLocation />;
+    } else {
+      return null;
+    }
+  };
+
   return (
     <div className="App" data-testid="app">
-      {loading && !error ? (
-        <LoadingComp />
-      ) : !loading && currentPosition ? (
-        <GeoMaps lat={currentPosition.lat} lng={currentPosition.lng} />
-      ) : !loading && error ? (
-        <ErrorLocation />
-      ) : null}
+      <RenderContent />
     </div>
   );
 }

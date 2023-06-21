@@ -58,9 +58,11 @@
     ]
   },
   "devDependencies": {
-    "@types/google-map-react": "^2.1.7"
+    "@types/google-map-react": "^2.1.7",
+    "jest-canvas-mock": "^2.5.1"
   },
   "engines": {
     "node": "16.x"
-  }
+  },
+  "setupFiles": ["<rootDir>/src/setupTests.js","jest-canvas-mock" ]
 }
