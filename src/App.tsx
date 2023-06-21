@@ -31,10 +31,11 @@ function App() {
   const successCallback = (position: any) => {
     const { latitude, longitude } = position.coords;
     setLocalStorage(latitude, longitude);
+    console.log(`Latitude: ${latitude} °, Longitude: ${longitude} °`)
 
     setCurrentPosition({
-      lat: latitude + Math.random() / 1000,
-      lng: longitude + Math.random() / 1000,
+      lat: latitude,
+      lng: longitude,
     });
   };
 
