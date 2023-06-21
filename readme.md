@@ -33,7 +33,7 @@ Provide a brief overview of the project, its purpose, and key features. Include 
 3. Install the dependencies:
 
     ```bash
-    cd npm install
+   npm install
     ```
 
 ## Usage
