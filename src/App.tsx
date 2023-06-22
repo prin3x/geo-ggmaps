@@ -64,12 +64,12 @@ function App() {
     };
   }, []);
 
-  if (errorCode === 1) return <ErrorLocation />;
-  
   return (
     <div className="App" data-testid="app">
       {currentPosition && errorCode !== 1 ? (
         <GeoMaps lat={currentPosition.lat} lng={currentPosition.lng} />
+      ) : errorCode === 1 ? (
+        <ErrorLocation />
       ) : (
         <LoadingComp />
       )}
