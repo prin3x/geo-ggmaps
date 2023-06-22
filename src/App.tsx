@@ -63,10 +63,10 @@ function App() {
   const RenderContent = () => {
     if (error) return <ErrorLocation />;
 
-    if (!currentPosition) {
-      return <LoadingComp />;
-    } else {
+    if (currentPosition) {
       return <GeoMaps lat={currentPosition.lat} lng={currentPosition.lng} />;
+    } else {
+      return <LoadingComp />;
     }
   };
 
