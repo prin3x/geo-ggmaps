@@ -15,7 +15,7 @@ function App() {
     currentPosition,
     setCurrentPosition,
   ] = React.useState<null | ICurrentPosition>(null);
-  
+
   const [error, setError] = React.useState<null | string>(null);
 
   const successCallback = (position: any) => {
@@ -25,11 +25,13 @@ function App() {
     changeCurrentPosition(latitude, longitude);
   };
 
-  const changeCurrentPosition = (lat: number, lng: number) =>
+  const changeCurrentPosition = (lat: number, lng: number) => {
     setCurrentPosition({
       lat,
       lng,
     });
+    setError(null);
+  };
 
   const errorCallback = (error: any) => {
     console.error(
