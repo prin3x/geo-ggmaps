@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import "./styles/style.css";
 import GeoMaps from "./components/GeoMaps";
 import LoadingComp from "./components/LoadingComp";
@@ -64,19 +64,15 @@ function App() {
     };
   }, []);
 
-  const RenderContent = () => {
-    if (errorCode === 1) return <ErrorLocation />;
-
-    if (currentPosition) {
-      return <GeoMaps lat={currentPosition.lat} lng={currentPosition.lng} />;
-    } else {
-      return <LoadingComp />;
-    }
-  };
-
   return (
     <div className="App" data-testid="app">
-      <RenderContent />
+      {errorCode === 1 ? (
+        <ErrorLocation />
+      ) : currentPosition && errorCode !== 1 ? (
+        <GeoMaps lat={currentPosition.lat} lng={currentPosition.lng} />
+      ) : (
+        <LoadingComp />
+      )}
     </div>
   );
 }
