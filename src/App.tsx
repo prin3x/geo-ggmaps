@@ -5,11 +5,17 @@ import LoadingComp from "./components/LoadingComp";
 import { setLocalStorage } from "./functions/localstorage.functions";
 import ErrorLocation from "./components/ErrorLocation";
 
+interface ICurrentPosition {
+  lat: number;
+  lng: number;
+}
+
 function App() {
-  const [currentPosition, setCurrentPosition] = React.useState<null | {
-    lat: number;
-    lng: number;
-  }>(null);
+  const [
+    currentPosition,
+    setCurrentPosition,
+  ] = React.useState<null | ICurrentPosition>(null);
+  
   const [error, setError] = React.useState<null | string>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
 
