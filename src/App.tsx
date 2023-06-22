@@ -64,12 +64,12 @@ function App() {
   }, []);
 
   const RenderContent = () => {
-    if (loading && !error) {
+    if (error) return <ErrorLocation />;
+
+    if (loading) {
       return <LoadingComp />;
     } else if (!loading && currentPosition) {
       return <GeoMaps lat={currentPosition.lat} lng={currentPosition.lng} />;
-    } else if (!loading && error) {
-      return <ErrorLocation />;
     } else {
       return null;
     }
