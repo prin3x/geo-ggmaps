@@ -66,9 +66,7 @@ function App() {
 
   return (
     <div className="App" data-testid="app">
-      {errorCode === 1 ? (
-        <ErrorLocation />
-      ) : currentPosition && errorCode !== 1 ? (
+      {currentPosition && errorCode !== 1 ? (
         <GeoMaps lat={currentPosition.lat} lng={currentPosition.lng} />
       ) : (
         <LoadingComp />
