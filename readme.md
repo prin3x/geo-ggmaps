@@ -42,15 +42,18 @@ This awesome application allows you to effortlessly track your current device lo
 
 2. Start the application
 
+    if you do not have serve
+
     ```bash
-    npm run start
+    npm install serve -g
     ```
 
-    or
+    and
 
     ```bash
     serve  -s build
     ```
+    
 3. Start test suites
 
     ```bash
