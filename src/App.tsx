@@ -16,7 +16,7 @@ function App() {
     setCurrentPosition,
   ] = React.useState<null | ICurrentPosition>(null);
 
-  const [error, setError] = React.useState<null | string>(null);
+  const [errorCode, setErrorCode] = React.useState<null | number>(null);
 
   const successCallback = (position: any) => {
     const { latitude, longitude } = position.coords;
@@ -30,14 +30,13 @@ function App() {
       lat,
       lng,
     });
-    setError(null);
   };
 
   const errorCallback = (error: any) => {
     console.error(
       `Error Geolocation WatchPosition - ${error.code} ${error.message}`
     );
-    setError(error);
+    setErrorCode(error.code);
   };
 
   useEffect(() => {
@@ -63,7 +62,7 @@ function App() {
   }, []);
 
   const RenderContent = () => {
-    if (error) return <ErrorLocation />;
+    // if (errorCode === 1) return <ErrorLocation />;
 
     if (currentPosition) {
       return <GeoMaps lat={currentPosition.lat} lng={currentPosition.lng} />;
