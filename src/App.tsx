@@ -64,6 +64,8 @@ function App() {
     };
   }, []);
 
+  if (errorCode === 1) return <ErrorLocation />;
+  
   return (
     <div className="App" data-testid="app">
       {currentPosition && errorCode !== 1 ? (
