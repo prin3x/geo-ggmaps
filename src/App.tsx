@@ -50,7 +50,10 @@ function App() {
     if (navigator.geolocation) {
       watchId = navigator.geolocation.watchPosition(
         successCallback,
-        errorCallback
+        errorCallback,
+        {
+          enableHighAccuracy: true,
+        }
       );
     }
 
@@ -62,7 +65,7 @@ function App() {
   }, []);
 
   const RenderContent = () => {
-    // if (errorCode === 1) return <ErrorLocation />;
+    if (errorCode === 1) return <ErrorLocation />;
 
     if (currentPosition) {
       return <GeoMaps lat={currentPosition.lat} lng={currentPosition.lng} />;
