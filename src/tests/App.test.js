@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import React from "react";
-import App from "./App";
-import GeoMaps from "./components/GeoMaps";
+import App from "../App";
+import GeoMaps from "../components/GeoMaps";
 import { setupJestCanvasMock } from 'jest-canvas-mock';
 import '@testing-library/jest-dom'
-import ErrorLocation from "./components/ErrorLocation";
+import ErrorLocation from "../components/ErrorLocation";
 
 
 describe("App", () => {

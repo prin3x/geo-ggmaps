@@ -51,6 +51,11 @@ This awesome application allows you to effortlessly track your current device lo
     ```bash
     serve  -s build
     ```
+3. Start test suites
+
+    ```bash
+    npm run test
+    ```
 
 ## Contributing
 Contributions are welcome! If you encounter any bugs or have suggestions for improvements, please open an issue or submit a pull request.

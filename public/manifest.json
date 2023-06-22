@@ -1,6 +1,6 @@
 {
   "host": "geo-ggmaps.vercel.app",
-  "short_name": "LT",
+  "short_name": "LocationTracker",
   "name": "LocationTracker",
   "icons": [
     {
