@@ -41,7 +41,7 @@ function App() {
 
     if (lat && lng) changeCurrentPosition(parseFloat(lat), parseFloat(lng));
 
-    let watchId: any;
+    let watchId: number;
 
     if (navigator.geolocation) {
       watchId = navigator.geolocation.watchPosition(
