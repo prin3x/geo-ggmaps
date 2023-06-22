@@ -17,14 +17,12 @@ function App() {
   ] = React.useState<null | ICurrentPosition>(null);
   
   const [error, setError] = React.useState<null | string>(null);
-  const [loading, setLoading] = React.useState<boolean>(true);
 
   const successCallback = (position: any) => {
     const { latitude, longitude } = position.coords;
     setLocalStorage(latitude, longitude);
 
     changeCurrentPosition(latitude, longitude);
-    setLoading(false);
   };
 
   const changeCurrentPosition = (lat: number, lng: number) =>
@@ -38,7 +36,6 @@ function App() {
       `Error Geolocation WatchPosition - ${error.code} ${error.message}`
     );
     setError(error);
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -66,12 +63,10 @@ function App() {
   const RenderContent = () => {
     if (error) return <ErrorLocation />;
 
-    if (loading) {
+    if (!currentPosition) {
       return <LoadingComp />;
-    } else if (!loading && currentPosition) {
-      return <GeoMaps lat={currentPosition.lat} lng={currentPosition.lng} />;
     } else {
-      return null;
+      return <GeoMaps lat={currentPosition.lat} lng={currentPosition.lng} />;
     }
   };
 
